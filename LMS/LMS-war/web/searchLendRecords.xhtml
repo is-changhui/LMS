@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./layout/default.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Search Members
+    </ui:define>
+
+    <ui:define name="content">
+        <p:dataTable var="lendAndReturn" 
+                     value="#{lendAndReturnManagedBean.lendAndReturns}" 
+                     style="table-layout: auto;"> 
+            <p:column headerText="LendAndReturn ID"> 
+                <h:outputText value="#{lendAndReturn.lendId}"/> 
+            </p:column> 
+
+            <p:column headerText="Member Identity No"> 
+                <h:outputText value="#{lendAndReturn.member.identityNo}"/> 
+            </p:column> 
+
+            <p:column headerText="Book Title"> 
+                <h:outputText value="#{lendAndReturn.book.title}"/> 
+            </p:column> 
+
+            <p:column headerText="Lend Date"> 
+                <h:outputText value="#{lendAndReturn.lendDate}"> 
+                    <f:convertDateTime type="date" pattern="yyyy-MM-dd HH:mm" timeZone="Asia/Singapore"/> 
+                </h:outputText> 
+            </p:column> 
+
+            <p:column headerText="Return Date"> 
+                <h:outputText value="#{lendAndReturn.returnDate}"> 
+                    <f:convertDateTime type="date" pattern="yyyy-MM-dd HH:mm" timeZone="Asia/Singapore"/> 
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="Fine Amount"> 
+                <h:outputText value="#{lendAndReturn.fineAmount}">
+                    <f:convertNumber pattern="$#,##0.00" />
+                </h:outputText>
+            </p:column> 
+
+        </p:dataTable> 
+    </ui:define>
+
+</ui:composition>

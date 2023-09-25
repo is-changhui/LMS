@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./layout/default.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Return Book
+    </ui:define>
+
+    <ui:define name="content">
+        <p:dataTable var="lendAndReturn" 
+                     value="#{lendAndReturnManagedBean.lendAndReturns}" 
+                     style="table-layout: auto;">
+            <p:column headerText="LendAndReturn ID"> 
+                <h:outputText value="#{lendAndReturn.lendId}"/> 
+            </p:column> 
+
+            <p:column headerText="Member Identity No"> 
+                <h:outputText value="#{lendAndReturn.member.identityNo}"/> 
+            </p:column> 
+
+            <p:column headerText="Book Title"> 
+                <h:outputText value="#{lendAndReturn.book.title}"/> 
+            </p:column> 
+
+            <p:column headerText="Lend Date"> 
+                <h:outputText value="#{lendAndReturn.lendDate}"> 
+                    <f:convertDateTime type="date" pattern="yyyy-MM-dd HH:mm" timeZone="Asia/Singapore"/> 
+                </h:outputText> 
+            </p:column> 
+
+            <p:column headerText="Return Date"> 
+                <h:outputText value="#{lendAndReturn.returnDate}">
+                    <f:convertDateTime type="date" pattern="yyyy-MM-dd HH:mm" timeZone="Asia/Singapore"/> 
+                </h:outputText> 
+            </p:column> 
+
+            <p:column headerText="Projected Fine Amount"> 
+                <h:outputText value="#{lendAndReturn.fineAmount}">
+                    <f:convertNumber pattern="$#,##0.00" />
+                </h:outputText>
+            </p:column> 
+        </p:dataTable> 
+        <br />
+
+        <h:form id="form"> 
+            <p:panelGrid columns="3"> 
+                <f:facet name="header"> 
+                    1. Retrieve Lend Record 
+                </f:facet>
+                <p:outputLabel value="LendAndReturn ID: "/>
+                <p:inputText value="#{lendAndReturnManagedBean.lendId}"/>
+                <p:commandButton value="Check Fine Amount" 
+                                 action="#{lendAndReturnManagedBean.viewFineAmount(lendAndReturnManagedBean.lendId)}"
+                                 update="fineAmount"/> 
+            </p:panelGrid>
+            <br />
+
+            <p:panelGrid columns="2"> 
+                <f:facet name="header"> 
+                    2. Check Fine Amount (if return today)
+                </f:facet>
+                Fine Amount To Be Collected:  
+                <p:outputLabel id="fineAmount" value="#{lendAndReturnManagedBean.fineAmount}" style="font-weight: bold;">
+                    <f:convertNumber pattern="$#,##0.00" />
+                </p:outputLabel>
+            </p:panelGrid>
+            <br />
+
+            <p:panelGrid columns="3"> 
+                <f:facet name="header"> 
+                    3. Return Book
+                </f:facet>
+                <p:outputLabel value="Amount Paid by Member: "/>
+                <p:inputText value="#{lendAndReturnManagedBean.paidFineAmount}"/>
+                <p:commandButton value="Confirm Return" 
+                                 actionListener="#{lendAndReturnManagedBean.returnBookRecord}" 
+                                 action="searchLendRecords.xhtml?faces-redirect=true"/>
+            </p:panelGrid>
+
+        </h:form> 
+
+    </ui:define>
+</ui:composition>

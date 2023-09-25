@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"  
+                template="./layout/default.xhtml" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html" 
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"> 
+    <ui:define name="title"> 
+        New Member 
+    </ui:define> 
+
+    <ui:define name="content"> 
+        <h:form id="form"> 
+            <p:panelGrid columns="2"> 
+                <f:facet name="header"> 
+                    Register Member 
+                </f:facet> 
+                <h:outputLabel for="firstName">First Name: </h:outputLabel> 
+                <h:panelGroup>
+                    <h:inputText id="firstName" value="#{memberManagedBean.firstName}"
+                                 required="true" requiredMessage="First Name is required" />
+                    <p:message for="firstName" />
+                </h:panelGroup>
+
+                <h:outputLabel for="lastName">Last Name: </h:outputLabel> 
+                <h:panelGroup>
+                    <h:inputText id="lastName" value="#{memberManagedBean.lastName}" 
+                                 required="true" requiredMessage="Last Name is required" />
+                    <p:message for="lastName" />
+                </h:panelGroup>
+
+                <h:outputLabel>Gender:</h:outputLabel> 
+                <h:panelGroup>
+                    <p:selectOneMenu value="#{memberManagedBean.gender}"> 
+                        <f:selectItem itemValue='M' itemLabel="M" /> 
+                        <f:selectItem itemValue='F' itemLabel="F" /> 
+                    </p:selectOneMenu> 
+                </h:panelGroup>
+
+                <h:outputLabel for="age">Age: </h:outputLabel> 
+                <h:panelGroup>
+                    <h:inputText id="age" value="#{memberManagedBean.age}"
+                                 required="true" requiredMessage="Age is required" />
+                    <p:message for="age" />
+                </h:panelGroup>
+
+                <h:outputLabel for="identityNo">Identity No: </h:outputLabel> 
+                <h:panelGroup>
+                    <h:inputText id="identityNo" value="#{memberManagedBean.identityNo}"
+                                 required="true" requiredMessage="Identity No is required" />
+                    <p:message for="identityNo" />
+                </h:panelGroup>
+
+                <h:outputLabel for="phone">Phone Number: </h:outputLabel> 
+                <h:panelGroup>
+                    <h:inputText id="phone" value="#{memberManagedBean.phone}"
+                                 required="true" requiredMessage="Phone number is required" />
+                    <p:message for="phone" /> 
+                </h:panelGroup>
+
+                <h:outputLabel for="address">Address: </h:outputLabel> 
+                <h:panelGroup>
+                    <h:inputText id="address" value="#{memberManagedBean.address}"
+                                 required="true" requiredMessage="Address is required" />
+                    <p:message for="address" />
+                </h:panelGroup>
+            </p:panelGrid>
+            <br />
+            <h:commandButton value="Submit" 
+                             actionListener="#{memberManagedBean.addMember}" 
+                             action="searchMembers.xhtml?faces-redirect=true"/> 
+        </h:form> 
+    </ui:define> 
+</ui:composition>
